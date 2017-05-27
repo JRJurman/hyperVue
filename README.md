@@ -1,8 +1,13 @@
-# vue-html
-
-[![NPM version](https://img.shields.io/npm/v/vue-html.svg?style=flat-square)](https://npmjs.com/package/vue-html) [![NPM downloads](https://img.shields.io/npm/dm/vue-html.svg?style=flat-square)](https://npmjs.com/package/vue-html) [![Build Status](https://img.shields.io/circleci/project/egoist/vue-html/master.svg?style=flat-square)](https://circleci.com/gh/egoist/vue-html)
+# hyperVue
 
 > Use tagged template string in Vue.js
+
+## Original Project vs Fork
+
+This project is a fork of egoist's
+[vue-html](https://github.com/egoist/vue-html).
+In egoist's vue-html, the key logic is bound to Vue (using `Vue.use(HTML)`).  
+In this version, vue-html is a function which takes in createElement.
 
 ## Install
 
@@ -10,15 +15,11 @@
 $ npm install --save vue-html
 ```
 
-CDN version: https://unpkg.com/vue-html/dist/
-
 ## Usage
 
 ```js
 import Vue from 'vue'
-import HTML from 'vue-html'
-
-Vue.use(HTML)
+import hyperVue from 'vue-html'
 
 new Vue({
   el: '#app',
@@ -30,44 +31,11 @@ new Vue({
       this.count++
     }
   },
-  render() {
-    return this.$html`
+  render(createElement) {
+    const html = hyperVue(createElement);
+    return hyperVue`
       <button onClick=${this.handleClick}>${this.count}</button>
     `
-  }
-})
-```
-
-The syntax is exactly the same as Vue JSX despiting that we're using [tagged template string](https://github.com/substack/hyperx) here.
-
-### Component
-
-You still have to use the original `h` function:
-
-```js
-new Vue({
-  el: '#app',
-  render(h) {
-    return this.$html`
-      ${h(Counter, {props: {start: 0}})}
-    `
-  }
-})
-
-const Counter = {}
-```
-
-### Mixed with `h`
-
-`this.$html` returns a vNode, it does the same thing that `h` function does, so you can use it with `h` function.
-
-```js
-new Vue({
-  el: '#app',
-  render(h) {
-    return h('div', null, [
-      this.$html`<span>foo</span>`
-    ])
   }
 })
 ```

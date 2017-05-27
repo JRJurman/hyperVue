@@ -2,9 +2,7 @@
 // $ yarn example
 
 import Vue from 'vue'
-import HTML from './src'
-
-Vue.use(HTML)
+import hyperVue from './src'
 
 const Counter = {
   props: ['start'],
@@ -18,9 +16,18 @@ const Counter = {
       this.count++
     }
   },
-  render() {
-    return this.$html`
-      <button style=${{backgroundColor: 'pink'}} id="foo" ref="foo" class="wow" nativeOnClick=${() => console.log('native')} onClick=${this.handleClick}>${this.count}</button>
+  render(createElement) {
+    const html = hyperVue(createElement);
+    return html`
+      <button style=${{backgroundColor: 'pink'}}
+        id="foo"
+        ref="foo"
+        class="wow"
+        nativeOnClick=${() => console.log('native')}
+        onClick=${this.handleClick}
+      >
+        ${this.count}
+      </button>
     `
   }
 }
@@ -28,7 +35,8 @@ const Counter = {
 new Vue({
   el: '#app',
   render(h) {
-    return this.$html`
+    const html = hyperVue(h);
+    return html`
       ${h(Counter, {props: {start: 0}})}
     `
   }

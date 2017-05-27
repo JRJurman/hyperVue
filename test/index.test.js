@@ -1,12 +1,11 @@
 import Vue from 'vue'
-import HTML from '../src'
-
-Vue.use(HTML)
+import hyperVue from '../src'
 
 test('main', () => {
   const vm = new Vue({
-    render() {
-      return this.$html`<div>hello</div>`
+    render(creteElement) {
+      const html = hyperVue(creteElement)
+      return html`<div>hello</div>`
     }
   }).$mount()
   expect(vm.$el.textContent).toBe('hello')
@@ -20,8 +19,9 @@ test('transform vue-specific attributes', () => {
         this.count++
       }
     },
-    render() {
-      return this.$html`
+    render(creteElement) {
+      const html = hyperVue(creteElement)
+      return html`
         <div onClick=${this.handleClick}>
           <span id="foo" class="hi" domPropsInnerHTML="hi"></span>
         </div>
