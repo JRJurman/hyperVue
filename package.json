@@ -1,6 +1,6 @@
 {
-  "name": "hyperVue",
-  "version": "0.4.0",
+  "name": "hypervue",
+  "version": "0.4.1",
   "description": "Use tagged template string in Vue.js",
   "license": "MIT",
   "repository": "jrjurman/hyperVue",
@@ -34,7 +34,7 @@
       "browser"
     ]
   },
-  "main": "dist/vue-html.common.js",
+  "main": "dist/hyperVue.common.js",
   "keywords": [
     "vue",
     "hyperx"

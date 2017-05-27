@@ -12,14 +12,14 @@ In this version, vue-html is a function which takes in createElement.
 ## Install
 
 ```bash
-$ npm install --save vue-html
+$ npm install --save hypervue
 ```
 
 ## Usage
 
 ```js
 import Vue from 'vue'
-import hyperVue from 'vue-html'
+import hyperVue from 'hypervue'
 
 new Vue({
   el: '#app',
